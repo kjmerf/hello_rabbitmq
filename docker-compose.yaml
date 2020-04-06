@@ -1,0 +1,25 @@
+version: '3'
+services:
+  rabbit:
+    image: rabbitmq:3.8.3
+    ports:
+      - '5672:5672'
+    networks:
+      - rabbit_network
+  send:
+    build: ./send
+    environment:
+      - RABBIT_SERVER=rabbit
+      - RABBIT_QUEUE=clicks
+      - MESSAGES_TO_SEND=100
+    networks:
+      - rabbit_network
+  receive:
+    build: ./receive
+    environment:
+      - RABBIT_SERVER=rabbit
+      - RABBIT_QUEUE=clicks
+    networks:
+      - rabbit_network
+networks:
+  rabbit_network: {}
