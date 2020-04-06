@@ -1,5 +1,5 @@
 # hello_rabbitmq
-This application streams fake web clicks data from the send container to the receive container.
+This application streams fake web clicks from the send container to the receive container.
 
 I made it to learn docker-compose and rabbitMQ.
 
