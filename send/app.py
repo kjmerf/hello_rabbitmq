@@ -42,6 +42,6 @@ if __name__ == '__main__':
     # publish 100 messsages
     for x in range(100):
         publish_click(faker, channel)
-        sleep(random.randint(0, 5))
+        sleep(random.randint(0, 3))
 
     connection.close()
