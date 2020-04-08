@@ -14,7 +14,6 @@ logging.basicConfig(format='%(levelname)s: %(message)s', level=logging.INFO)
 
 host = os.getenv('RABBIT_SERVER')
 queue = os.getenv('RABBIT_QUEUE')
-messages_to_send = os.getenv('MESSAGES_TO_SEND')
 
 faker = Faker()
 
@@ -32,7 +31,6 @@ def publish_click(faker, channel):
 if __name__ == '__main__':
 
     # need to sleep to give time for rabbit server to start
-
     sleep(30)
 
     connection = pika.BlockingConnection(
@@ -41,8 +39,8 @@ if __name__ == '__main__':
 
     channel.queue_declare(queue=queue)
 
-    for x in range(int(messages_to_send)):
+    for x in range(100):
         publish_click(faker, channel)
-        sleep(random.randint(0, 10))
+        sleep(random.randint(0, 5))
 
     connection.close()

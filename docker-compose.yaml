@@ -5,21 +5,26 @@ services:
     ports:
       - '5672:5672'
     networks:
-      - rabbit_network
+      - network
   send:
     build: ./send
     environment:
       - RABBIT_SERVER=rabbit
       - RABBIT_QUEUE=clicks
-      - MESSAGES_TO_SEND=100
+    depends_on:
+      - rabbit
     networks:
-      - rabbit_network
+      - network
   receive:
     build: ./receive
     environment:
       - RABBIT_SERVER=rabbit
       - RABBIT_QUEUE=clicks
+    volumes:
+      - "./out:/tmp"
+    depends_on:
+      - send
     networks:
-      - rabbit_network
+      - network
 networks:
-  rabbit_network: {}
+  network: {}
