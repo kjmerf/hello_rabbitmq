@@ -39,6 +39,7 @@ if __name__ == '__main__':
 
     channel.queue_declare(queue=queue)
 
+    # publish 100 messsages
     for x in range(100):
         publish_click(faker, channel)
         sleep(random.randint(0, 5))
