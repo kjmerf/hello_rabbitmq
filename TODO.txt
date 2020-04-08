@@ -1,4 +1,2 @@
-Show received messages in UI using flask
-Count received messages
 Add more publishers
 Add more consumers

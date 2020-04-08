@@ -1,10 +1,10 @@
-FROM python:3.7.4
+FROM python
 
 COPY ./requirements.txt /tmp/requirements.txt
 
 RUN pip install --upgrade pip \
     && pip install -r /tmp/requirements.txt
 
-COPY ./app.py /app.py
+COPY ./app.py /app/app.py
 
-ENTRYPOINT ["python3", "app.py"]
+ENTRYPOINT ["python3", "app/app.py"]

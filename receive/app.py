@@ -25,7 +25,7 @@ def callback(ch, method, properties, body):
 if __name__ == '__main__':
 
     # need to sleep to give time for rabbit server to start
-    sleep(35)
+    sleep(20)
 
     # create empty file to which we can append
     with open('/tmp/clicks.json', 'wb') as f:

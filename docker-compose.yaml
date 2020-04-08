@@ -21,10 +21,20 @@ services:
       - RABBIT_SERVER=rabbit
       - RABBIT_QUEUE=clicks
     volumes:
-      - "./out:/tmp"
+      - volume:/tmp
     depends_on:
       - send
     networks:
       - network
+  display:
+    build: ./display
+    ports:
+      - '5000:5000'
+    volumes:
+      - volume:/tmp
+    depends_on:
+      - receive
 networks:
   network: {}
+volumes:
+  volume:

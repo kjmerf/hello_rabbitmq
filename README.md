@@ -7,4 +7,4 @@ To start the application, just run:
 ```shell
 ./start.sh
 ```
-Then check ```/out/clicks.json``` to see web clicks!
+Then check http://localhost:5000/ to see web clicks!

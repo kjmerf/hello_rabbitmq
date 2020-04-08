@@ -31,7 +31,7 @@ def publish_click(faker, channel):
 if __name__ == '__main__':
 
     # need to sleep to give time for rabbit server to start
-    sleep(30)
+    sleep(15)
 
     connection = pika.BlockingConnection(
         pika.ConnectionParameters(host=host))
