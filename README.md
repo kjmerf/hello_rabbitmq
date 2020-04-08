@@ -8,3 +8,4 @@ To start the application, just run:
 ./start.sh
 ```
 Then check http://localhost:5000/ to see web clicks!
+Refresh for updates.
