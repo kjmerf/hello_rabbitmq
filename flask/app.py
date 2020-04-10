@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 
+import sqlite3
 from time import sleep
 
 from flask import Flask
@@ -15,10 +16,19 @@ app = Flask(__name__)
 def my_form_post():
     """Displays web clicks"""
 
-    with open('/tmp/clicks.json') as f:
-        data = f.read().replace('\n', '<br>')
+    conn = sqlite3.connect('/tmp/clicks.db')
+    c = conn.cursor()
 
-    return render_template_string(data)
+    data = ''
+    rows = 0
+    for row in c.execute('select * from clicks'):
+        data += ', '.join(row)
+        data += '<br>'
+        rows += 1
+
+    conn.close()
+
+    return render_template_string(f'clicks: {rows}<br><br>{data}')
 
 
 if __name__ == '__main__':
