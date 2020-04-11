@@ -3,6 +3,7 @@
 import json
 import logging
 import os
+import random
 import sqlite3
 from time import sleep
 
@@ -15,10 +16,11 @@ queue = os.getenv('RABBIT_QUEUE')
 
 
 def insert_values(values):
-    """Inserts row into database"""
+    """Inserts row into clicks table"""
 
     conn = sqlite3.connect('/tmp/clicks.db')
     c = conn.cursor()
+    c.execute('create table if not exists clicks (email text, country text, timestamp text)')
     c.execute('insert into clicks (email, country, timestamp) values (?, ?, ?)', values)
     conn.commit()
     conn.close()
@@ -34,6 +36,9 @@ def callback(ch, method, properties, body):
     email = body_as_dct['email']
     country = body_as_dct['country']
     timestamp = body_as_dct['timestamp']
+
+    # simulate work
+    sleep(random.randint(0, 5))
 
     insert_values((email, country, timestamp))
 
@@ -51,6 +56,6 @@ if __name__ == '__main__':
 
     channel.queue_declare(queue=queue)
     channel.basic_consume(
-            queue=queue, on_message_callback=callback, auto_ack=True)
+            queue=queue, on_message_callback=callback)
 
     channel.start_consuming()

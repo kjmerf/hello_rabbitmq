@@ -6,10 +6,6 @@ services:
       - '5672:5672'
     networks:
       - network
-  sqlite3:
-    build: ./sqlite3
-    volumes:
-      - volume:/tmp
   send:
     build: ./send
     environment:
@@ -17,7 +13,6 @@ services:
       - RABBIT_QUEUE=clicks
     depends_on:
       - rabbit
-      - sqlite3
     networks:
       - network
   receive:

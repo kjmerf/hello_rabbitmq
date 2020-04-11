@@ -2,4 +2,4 @@
 
 set -euo pipefail
 
-docker-compose up --build --remove-orphans
+docker-compose up --build --remove-orphans --scale receive=3
